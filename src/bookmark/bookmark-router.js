@@ -24,10 +24,7 @@ bookmarkRouter
       return res.status(400).send("URL required.")
     }
 
-    if (!description) {
-      logger.error(`Description is required.`);
-      return res.status(400).send("Description required.")
-    }
+    const setDescription = (!description) ? " ": description
 
     const id = uuidv4();
 
@@ -35,7 +32,7 @@ bookmarkRouter
       id,
       title,
       url,
-      description,
+      description: setDescription,
       rating
     }
 
