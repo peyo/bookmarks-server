@@ -24,19 +24,18 @@ bookmarkRouter
       return res.status(400).send("URL required.")
     }
 
-    const setDescription = (!description) ? " ": description
-
     const id = uuidv4();
 
     const bookmark = {
       id,
       title,
       url,
-      description: setDescription,
+      description,
       rating
     }
 
     bookmarks.push(bookmark);
+    logger.info(`Bookmark with id ${id} added.`)
 
     res
       .status(201)
@@ -62,25 +61,19 @@ bookmarkRouter
   .delete ((req, res) => {
     const { id } = req.params;
 
-    const bookmarkIndex = bookmarks.findIndex(b => b.id === id);
+    const sameId = bookmark => bookmark.id.toString() === id;
+    const bookmarkIndex = bookmarks.findIndex(sameId);
+    console.log(bookmarkIndex);
 
     if (bookmarkIndex === -1) {
-      logger.error(`Specific bookmark not found.`);
+      logger.error(`Bookmark with id ${id} not found.`);
       return res
         .status(404)
-        .send("Not found.");
+        .send("Bookmark not found.");
     }
 
-    // filter bookmark from bookmarks that does not include id
-    bookmarks.forEach(bookmark => {
-      const bookmarkId = bookmark.id.filter(bid => bid !== id);
-      bookmark.id = bookmarkId;
-    });
-
     bookmarks.splice(bookmarkIndex, 1);
-
     logger.info(`Bookmark with id ${id} deleted.`)
-
     res
       .status(204)
       .end();
