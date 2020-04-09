@@ -5,7 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const logger = require("./logger");
 const { NODE_ENV } = require("./config");
-const bookmarkRouter = require("./bookmark/bookmark-router");
+const bookmarksRouter = require("./bookmark/bookmark-router");
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.use(function validateBearerToken(req, res, next) {
   next()
 });
 
-app.use(bookmarkRouter);
+app.use(bookmarksRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response
