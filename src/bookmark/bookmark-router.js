@@ -101,7 +101,7 @@ bookmarksRouter
 
     BookmarksService.updateBookmark(
       req.app.get("db"),
-      req.params.bookmark_id,
+      req.params.bookmarkId,
       bookmarkToUpdate
     )
       .then(numRowsAffected => {
