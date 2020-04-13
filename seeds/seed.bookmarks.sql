@@ -4,3 +4,5 @@ VALUES
   ('Google', 'https://www.google.com', 'Search anything', 5),
   ('YouTube', 'https://www.youtube.com', 'Watch stuff', 5),
   ('Facebook', 'https://www.facebook.com', 'Stay connected', 3);
+
+  
