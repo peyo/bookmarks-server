@@ -63,7 +63,7 @@ bookmarksRouter
       .then(bookmark => {
         if (!bookmark) {
           return res.status(404).json({
-            error: { message: `Bookmark doesn't exist` },
+            error: { message: `Bookmark with id ${id} doesn't exist` },
           })
         }
         res.bookmark = bookmark
@@ -101,7 +101,7 @@ bookmarksRouter
 
     BookmarksService.updateBookmark(
       req.app.get("db"),
-      req.params.bookmarkId,
+      req.params.id,
       bookmarkToUpdate
     )
       .then(numRowsAffected => {

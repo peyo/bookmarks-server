@@ -51,9 +51,9 @@ describe.only('Bookmarks Endpoints', () => {
   describe(`GET /api/bookmarks/:id`, () => {
     context(`Given no bookmark found`, () => {
       it(`responds with 404`, () => {
-        const bookmarkId = 123456
+        const id = 123456
         return supertest(app)
-          .get(`/api/bookmarks/${bookmarkId}`)
+          .get(`/api/bookmarks/${id}`)
           .set("Authorization", "Bearer " + process.env.API_TOKEN)
           .expect(404, { error: { message: `Bookmark doesn't exist` } })
       })
@@ -69,10 +69,10 @@ describe.only('Bookmarks Endpoints', () => {
       })
 
       it('responds with 200 and the specified bookmark', () => {
-        const bookmarkId = 3
-        const expectedBookmark = testBookmarks[bookmarkId - 1]
+        const id = 3
+        const expectedBookmark = testBookmarks[id - 1]
         return supertest(app)
-          .get(`/api/bookmarks/${bookmarkId}`)
+          .get(`/api/bookmarks/${id}`)
           .set("Authorization", "Bearer " + process.env.API_TOKEN)
           .expect(200, expectedBookmark)
       })
@@ -172,21 +172,21 @@ describe.only('Bookmarks Endpoints', () => {
 
     context(`Given no bookmarks`, () => {
       it(`responds with 404`, () => {
-        const bookmarkId = 123456
+        const id = 123456
         return supertest(app)
-          .delete(`/api/bookmarks/${bookmarkId}`)
+          .delete(`/api/bookmarks/${id}`)
           .set("Authorization", "Bearer " + process.env.API_TOKEN)
           .expect(404, { error: { message: `Bookmark doesn't exist` } })
       })
     })
   })
 
-  describe.only(`PATCH /api/articles/:article_id`, () => {
-    context(`Given no articles`, () => {
+  describe.only(`PATCH /api/bookmarks/:id`, () => {
+    context(`Given no bookmarks`, () => {
       it(`responds with 404`, () => {
-        const bookmarkId = 123456;
+        const id = 123456;
         return supertest(app)
-          .patch(`/api/bookmarks/${bookmarkId}`)
+          .patch(`/api/bookmarks/${id}`)
           .expect(404, { error: { message: `Bookmark doesn't exist` } })
       })
     })
